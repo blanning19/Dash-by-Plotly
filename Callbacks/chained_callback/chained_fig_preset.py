@@ -11,7 +11,7 @@ external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
 # Data from U.S. Congress, Joint Economic Committee, Social Capital Project. https://www.jec.senate.gov/public/index.cfm/republicans/2018/4/the-geography-of-social-capital-in-america
-df = pd.read_csv("social-capital-project.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/Coding-with-Adam/Dash-by-Plotly/master/Callbacks/chained_callback/social-capital-project.csv")
 
 app.layout = html.Div([
     html.Label("State:", style={'fontSize':30, 'textAlign':'center'}),
@@ -64,7 +64,7 @@ def update_grpah(selected_counties, selected_state):
                          trendline='ols',
                          size='bubble_size',
                          hover_name='County',
-                         hover_data={'bubble_size':False},
+                         # hover_data={'bubble_size':False},
                          labels={'% adults graduated high school':'% graduated high school',
                                  '% without health insurance':'% no health insurance',
                                  '% in fair or poor health':'% poor health'}
@@ -74,3 +74,7 @@ def update_grpah(selected_counties, selected_state):
 
 if __name__ == '__main__':
     app.run_server(debug=True, port=3000)
+
+    
+ 
+# https://youtu.be/ZxshFO0bbZM

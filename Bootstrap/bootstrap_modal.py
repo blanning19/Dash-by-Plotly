@@ -1,48 +1,48 @@
+# Video:    [Bootstrap Alerts & Modals - Dash Plotly](https://youtu.be/X3OuhqS8ueM)
+# Docs:     [Dash Bootstrap Components:](https://dash-bootstrap-components.opensource.faculty.ai/docs/components/alert/)
+#           [Dash Bootstrap Themes:](https://dash-bootstrap-components.opensource.faculty.ai/docs/themes/)
+#           [Dash HTML/CORE Components:](https://dash.plotly.com/dash-html-components)
 import dash
-import dash_bootstrap_components as dbc
-import dash_html_components as html
-import dash_core_components as dcc
+from dash import Dash, dcc, html, Input, Output, State           # pip install dash
+import dash_bootstrap_components as dbc         # pip install dash_bootstrap_components
 import plotly.express as px
-from dash.dependencies import Input, Output, State
 import pandas as pd
+df = pd.read_csv("https://raw.githubusercontent.com/Coding-with-Adam/Dash-by-Plotly/master/Bootstrap/Berlin_crimes.csv")
 
-df = pd.read_csv("Berlin_crimes.csv")
-
-app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP]) # https://bootswatch.com/default/
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP]) # https://bootswatch.com/default/
 
 modal = html.Div(
     [
         dbc.Button("Add comment", id="open"),
 
         dbc.Modal([
-            dbc.ModalHeader("All About Berlin"),
+            dbc.ModalHeader(dbc.ModalTitle("All About Berlin", style={"font-size": "24px", "font-style": "italic"})),
             dbc.ModalBody(
                 dbc.Form(
                     [
-                        dbc.FormGroup(
+                        dbc.Row(
                             [
-                                dbc.Label("Name", className="mr-2"),
+                                dbc.Label("Name", className="mt-1"),
                                 dbc.Input(type="text", placeholder="Enter your name"),
                             ],
-                            className="mr-3",
+                            className="mb-2",
                         ),
-                        dbc.FormGroup(
+                        dbc.Row(
                             [
-                                dbc.Label("Email", className="mr-2"),
+                                dbc.Label("Email", className="mt-1"),
                                 dbc.Input(type="email", placeholder="Enter email"),
                             ],
-                            className="mr-3",
+                            className="mb-2",
                         ),
-                        dbc.FormGroup(
+                        dbc.Row(
                             [
-                                dbc.Label("Comment", className="mr-2"),
+                                dbc.Label("Comment", className="mt-1"),
                                 dbc.Input(type="text", placeholder="Enter comment"),
                             ],
-                            className="mr-3",
+                            className="mb-2",
                         ),
                         dbc.Button("Submit", color="primary"),
                     ],
-                    inline=True,
                 )
             ),
             dbc.ModalFooter(
@@ -157,6 +157,3 @@ def toggle_modal(n1, n2, is_open):
 
 if __name__ == "__main__":
     app.run_server(debug=True)
-
-    
-# https://youtu.be/X3OuhqS8ueM

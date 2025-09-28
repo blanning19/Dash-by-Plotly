@@ -6,7 +6,7 @@ import plotly.express as px
 import dash_bootstrap_components as dbc  # pip install dash-bootstrap-components
 import pandas as pd  # pip install pandas
 
-df = pd.read_csv("green_tripdata_2019-01.csv") # https://drive.google.com/file/d/1Srm_mhf6oRb6R5kFijFzaZk6tye9Ugb0/view
+df = pd.read_csv("green_tripdata_2019-01.csv") # https://drive.google.com/file/d/13_zdqPKoj5ahIZ5g7CXRE5CNkiO9P_vP/view?usp=sharing
 df = df[df["total_amount"] > 0]
 df = df[:150000]
 
@@ -28,7 +28,7 @@ app.layout = html.Div(
                     width={'size': 2, 'offset': 1}),
             dbc.Col(dbc.Button(id="loading-button", n_clicks=0, children=["Passengers"]),
                     width={'size': 1, 'offset': 0})
-        ], no_gutters=True),
+        ]), # no_gutters is no longer possible with the new Dash Bootstrap components version upgrade
 
         html.Br(),
         dbc.Row(dbc.Col(dbc.Progress(children=["25%"], value=25, max=100, striped=True, color="success", style={"height": "20px"}),
@@ -53,3 +53,6 @@ def load_output(n_clicks, psg_num):
 
 if __name__ == "__main__":
     app.run_server(debug=True)
+
+    
+# https://youtu.be/t1bKNj021do
